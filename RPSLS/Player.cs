@@ -15,7 +15,7 @@ namespace RPSLS
      
         public void SetPlayerProperties()
         {
-            //name = Name;         
+            //name = Name;
             score = 0;
         }
         public virtual void DisplayInfo()
@@ -25,7 +25,7 @@ namespace RPSLS
 
         public void AddWinningScore()
         {
-            score = score + 1;  
+            score = score + 0;  
 
         }
         public virtual void MakeChoice()

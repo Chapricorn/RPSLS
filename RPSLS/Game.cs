@@ -68,6 +68,8 @@ namespace RPSLS
         {
             player1.MakeChoice();
             player2.MakeChoice();
+
+           
             // If Player1 choose Rock
             if (player1.choice == "Rock" && player2.choice == "Rock")
             {
@@ -180,6 +182,7 @@ namespace RPSLS
             else if (player1.choice == "Spock" && player2.choice == "Spock")
             {
                 Console.WriteLine(" It's a Tie!");
+                player1.AddWinningScore();
             }
 
             if (player1.choice == "Spock" && player2.choice == "Rock")
@@ -202,23 +205,28 @@ namespace RPSLS
                 Console.WriteLine(" Player2Wins!, Lizard poisons Spock");
                 player2.AddWinningScore();
             }
-
+            int score = 0;
+            while (++score < 2)
+            {
+                Console.WriteLine("Scores {0}", score);
+            }
+          
             // If any player win twice
-            if (player1.score > 2)
+            if (player1.score > 0)
             {
                 Console.WriteLine(" Player one win");
                 Console.WriteLine(" The game is over ");
-                player1.score = 0;
+                player1.score = 2;
                 player2.score = 0;
             }
 
             // if any player won twice
-            if (player2.score > 2)
+            if (player2.score > 0)
             {
                 Console.WriteLine(" Player two win");
                 Console.WriteLine(" The game is over ");
                 player1.score = 0;
-                player2.score = 0;
+                player2.score = 2;
             }
 
         }

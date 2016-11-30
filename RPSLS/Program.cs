@@ -16,11 +16,7 @@ namespace RPSLS
             game.RunGame();
             Console.ReadLine();
 
-
-
-            
-           
-
+            game.ComputeWinner();
         }
     }
 }
