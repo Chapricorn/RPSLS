@@ -7,290 +7,225 @@ using System.Threading.Tasks;
 namespace RPSLS
 {
     class Game
-
     {
-        public string name = string.Empty;
-      
-        public void gameRules()
+        Player player1;
+        Player player2;
+        public Game()
         {
-            Console.WriteLine(" Thank You for choosing The RPSLS Game, here are the Rules: ");
+
+        }
+        public void RunGame()
+        {
+            GameRules();
+            SetUpPlayers();
+            //loop
+            ComputeWinner();
+        }
+        public void GameRules()
+        {
+            Console.WriteLine(" Thank You for choosing The RPSLS Game, here are the Rules. \n");
+            Console.WriteLine(" PRESS ENTER TO CONTINUE. ");
             Console.ReadLine();
             Console.WriteLine(" Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard, Lizard poisons Spock, ");
             Console.WriteLine(" Spock smashes Scissors, Scissors decapitates Lizard, Lizard eats Paper, ");
-            Console.WriteLine(" Paper disproves Spock, Spock vaporizes Rock, and Rock crushes Scissors. ");
+            Console.WriteLine(" Paper disproves Spock, Spock vaporizes Rock, and Rock crushes Scissors. \n");
+            Console.WriteLine(" PRESS ENTER TO CONTINUE! ");
             Console.ReadLine();
 
         }
 
-        public void playerOrComp(Player PlayerOne, Player PlayerTwo)
+        public void SetUpPlayers()
         {
-            Console.WriteLine(" Do you want to verse another Player OR verse the Computer?");
+            player1 = new Human();
+            player1.GetName();
+
+            Console.WriteLine(" Do you want to play against another Player OR against the Computer? \n");
+            Console.WriteLine(" TYPE: Player or Computer");
             string userInput = Console.ReadLine().ToLower();
-
-
             if (userInput == "Player" || userInput == "player") 
             {
-                Console.WriteLine(" You are playing against another Player");
-                Console.ReadLine();
-
-                // Create new playerTwo
-                PlayerOne = new Player();
-
-                Console.WriteLine(" Enter Player Name: ");
-                Console.ReadLine();
-                name = userInput;
-
-                PlayerOne.SetPlayerProperties(name);
-                PlayerOne.DisplayInfo();
-
-
-                // Create new playerTwo
-                PlayerTwo = new Player();
-                Console.WriteLine(" Enter Player2 Name: ");
-                Console.ReadLine();
-                name = userInput;
-                PlayerTwo.DisplayInfo();
+                Console.WriteLine(" GREAT! You are playing against another Player \n");
+                player2 = new Human();
+                player2.GetName();          
             }
 
             else if (userInput == "Computer")
             {
-                Console.WriteLine(" You are playing against Computer");
-                Console.ReadLine();
-                //    Computer computer = new Computer();
-                //    computer.startComputer();
+                Console.WriteLine(" YOU ARE VERSING Computer");
+                player2 = new Computer();
+                player2.GetName();
+               
             }
             else
             {
-
-                Console.WriteLine(" Please choose Opponent: Player or Computer");
-                playerOrComp(PlayerOne, PlayerTwo);
+                Console.WriteLine(" PLEASE CHOOSE OPPONENT: Player or Computer");
+                SetUpPlayers();
             }
         }
 
-        public void chooseChoiceForPlayerOne(Player PlayerOne)
+        public void ComputeWinner()
+
         {
-            Console.WriteLine("Player1 Enter: Paper, Rock, Scissors, Lizard, or Spock.");
-            string player1choice = Console.ReadLine().ToLower();
-            PlayerOne.chooseChoice = player1choice.ToString();
-            switch (player1choice)
+            player1.MakeChoice();
+            player2.MakeChoice();
+            // If Player1 choose Rock
+            if (player1.choice == "Rock" && player2.choice == "Rock")
             {
-                case "paper":
-                    Console.WriteLine(" Player1 have chosen: " + player1choice + "! \n");
-                    break;
-                case "rock":
-                    Console.WriteLine(" Player1 have chosen:  " + player1choice + "! \n");
-                    break;
-                case "scissors":
-                    Console.WriteLine(" Player1 have chosen: " + player1choice + "! \n");
-                    break;
-                case "lizard":
-                    Console.WriteLine(" Player1 have chosen:  " + player1choice + "! \n");
-                    break;
-                case "spock":
-                    Console.WriteLine(" Player1 have chosen:  " + player1choice + "! \n");
-                    break;
-                default:
-                    Console.WriteLine(" Please chose a choice! ");
-                    chooseChoiceForPlayerOne(PlayerOne);
-                    break;
-            }
-        }
-        public void chooseChoiceForPlayerTwo(Player PlayerTwo)
-        {
-
-            Console.WriteLine("Player2 Enter: Paper, Rock, Scissors, Lizard, or Spock.");
-            string player2choice = Console.ReadLine().ToLower();
-
-            PlayerTwo.chooseChoice = player2choice.ToString();
-
-            switch (player2choice)
-
-            {
-                case "paper":
-                    Console.WriteLine(" Player2 have chosen: " + player2choice + "! \n");
-                    break;
-                case "rock":
-                    Console.WriteLine(" Player2 have chosen:  " + player2choice + "! \n");
-                    break;
-                case "scissors":
-                    Console.WriteLine(" Player2 have chosen: " + player2choice + "! \n");
-                    break;
-                case "lizard":
-                    Console.WriteLine(" Player2 have chosen:  " + player2choice + "! \n");
-                    break;
-                case "spock":
-                    Console.WriteLine(" Player2 have chosen:  " + player2choice + "! \n");
-                    break;
-                default:
-                    Console.WriteLine(" Please chose a choice! ");
-                    chooseChoiceForPlayerTwo(PlayerTwo);
-                    break;
-            }
-
-        }
-
-        public void ComputeWinner(Player PlayerOne, Player PlayerTwo)
-        {
-            // Player1 choose Rock
-            if (PlayerOne.chooseChoice == "Rock" && PlayerTwo.chooseChoice == "Rock") {
                 Console.WriteLine(" It's a Tie!");
-                PlayerOne.AddWinningScore();
             }
 
-            if (PlayerOne.chooseChoice == "Rock" && PlayerTwo.chooseChoice == "Paper")
+            if (player1.choice == "Rock" && player2.choice == "Paper")
             {
                 Console.WriteLine(" Player2 Win! Paper covers Rock");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Rock" && PlayerTwo.chooseChoice == "Scissors")
+            if (player1.choice == "Rock" && player2.choice == "Scissors")
             {
                 Console.WriteLine(" Player1 Wins! Rock crushes Scissors");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Rock" && PlayerTwo.chooseChoice == "Lizard")
+            if (player1.choice == "Rock" && player2.choice == "Lizard")
             {
                 Console.WriteLine(" Player1 Wins! Rock crushes Lizards");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Rock" && PlayerTwo.chooseChoice == "Spock")
+            if (player1.choice == "Rock" && player2.choice == "Spock")
             {
                 Console.WriteLine(" Player2 Wins!, Spock Vaporizes Rock");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
 
-            // Player1 choose Paper
-            if (PlayerOne.chooseChoice == "Paper" && PlayerTwo.chooseChoice == "Paper")
+            // If Player1 choose Paper
+            else if (player1.choice == "Paper" && player2.choice == "Paper")
             {
                 Console.WriteLine(" It's a Tie!");
-                PlayerOne.AddWinningScore();
             }
 
-            if (PlayerOne.chooseChoice == "Paper" && PlayerTwo.chooseChoice == "Rock")
+            if (player1.choice == "Paper" && player2.choice == "Rock")
             {
                 Console.WriteLine(" Player1 Win! Paper covers Rock");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Paper" && PlayerTwo.chooseChoice == "Scissors")
+            if (player1.choice == "Paper" && player2.choice == "Scissors")
             {
                 Console.WriteLine(" Player2 Wins! Scissors cuts Paper");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Paper" && PlayerTwo.chooseChoice == "Lizard")
+            if (player1.choice == "Paper" && player2.choice == "Lizard")
             {
                 Console.WriteLine(" Player2 Wins! Lizard eats Paper");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Paper" && PlayerTwo.chooseChoice == "Spock")
+            if (player1.choice == "Paper" && player2.choice == "Spock")
             {
                 Console.WriteLine(" Player1 Wins!, Paper disproves Spock");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
 
-            // Player1 choose Scissors
-            if (PlayerOne.chooseChoice == "Scissors" && PlayerTwo.chooseChoice == "Scissors")
+            // If Player1 choose Scissors
+            else if (player1.choice == "Scissors" && player2.choice == "Scissors")
             {
                 Console.WriteLine(" It's a Tie!");
-                PlayerOne.AddWinningScore();
             }
 
-            if (PlayerOne.chooseChoice == "Scissors" && PlayerTwo.chooseChoice == "Paper")
+            if (player1.choice == "Scissors" && player2.choice == "Paper")
             {
                 Console.WriteLine(" Player1 Win! Scissors cuts Paper");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Scissors" && PlayerTwo.chooseChoice == "Rock")
+            if (player1.choice == "Scissors" && player2.choice == "Rock")
             {
                 Console.WriteLine(" Player2 Wins! Rock crushes Scissors");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Scissors" && PlayerTwo.chooseChoice == "Lizard")
+            if (player1.choice == "Scissors" && player2.choice == "Lizard")
             {
                 Console.WriteLine(" Player1 Wins! Scissors decapitates Lizard");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Scissors" && PlayerTwo.chooseChoice == "Spock")
+            if (player1.choice == "Scissors" && player2.choice == "Spock")
             {
                 Console.WriteLine(" Player2 Wins!, Spock smashes Scissors");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
 
-            // Player1 choose Lizard
-            if (PlayerOne.chooseChoice == "Lizard" && PlayerTwo.chooseChoice == "Lizard")
+            // If Player1 choose Lizard
+            else if (player1.choice == "Lizard" && player2.choice == "Lizard")
             {
                 Console.WriteLine(" It's a Tie!");
-                PlayerOne.AddWinningScore();
             }
 
-            if (PlayerOne.chooseChoice == "Lizard" && PlayerTwo.chooseChoice == "Rock")
+            if (player1.choice == "Lizard" && player2.choice == "Rock")
             {
                 Console.WriteLine(" Player2 Wins! Rock crushes Lizard");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Lizard" && PlayerTwo.chooseChoice == "Paper")
+            if (player1.choice == "Lizard" && player2.choice == "Paper")
             {
                 Console.WriteLine(" Player1 Wins! Lizard eats Paper");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Lizard" && PlayerTwo.chooseChoice == "Scissors")
+            if (player1.choice == "Lizard" && player2.choice == "Scissors")
             {
                 Console.WriteLine(" Player1 Wins! Scissors decapitates Lizard");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Lizard" && PlayerTwo.chooseChoice == "Spock")
+            if (player1.choice == "Lizard" && player2.choice == "Spock")
             {
                 Console.WriteLine(" Player1 Wins!, Lizard poisons Spock");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
 
-            // Player1 choose Spock
-            if (PlayerOne.chooseChoice == "Spock" && PlayerTwo.chooseChoice == "Spock")
+            // If Player1 choose Spock
+            else if (player1.choice == "Spock" && player2.choice == "Spock")
             {
                 Console.WriteLine(" It's a Tie!");
-                PlayerOne.AddWinningScore();
             }
 
-            if (PlayerOne.chooseChoice == "Spock" && PlayerTwo.chooseChoice == "Rock")
+            if (player1.choice == "Spock" && player2.choice == "Rock")
             {
                 Console.WriteLine(" Player1 Wins! Spock vaporizes Rock");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Spock" && PlayerTwo.chooseChoice == "Paper")
+            if (player1.choice == "Spock" && player2.choice == "Paper")
             {
                 Console.WriteLine(" Player2 Wins! Paper disproves Spock");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Spock" && PlayerTwo.chooseChoice == "Scissors")
+            if (player1.choice == "Spock" && player2.choice == "Scissors")
             {
                 Console.WriteLine(" Player1 Wins! Spock smashes Scissors");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
-            if (PlayerOne.chooseChoice == "Spock" && PlayerTwo.chooseChoice == "Lizard")
+            if (player1.choice == "Spock" && player2.choice == "Lizard")
             {
                 Console.WriteLine(" Player2Wins!, Lizard poisons Spock");
-                PlayerTwo.AddWinningScore();
+                player2.AddWinningScore();
             }
 
-            // if any player won twice
-            if (PlayerOne.score > 1){
+            // If any player win twice
+            if (player1.score > 2)
+            {
                 Console.WriteLine(" Player one win");
                 Console.WriteLine(" The game is over ");
-                PlayerOne.score = 0;
-                PlayerTwo.score = 0;
+                player1.score = 0;
+                player2.score = 0;
             }
 
             // if any player won twice
-            if (PlayerTwo.score > 1)
+            if (player2.score > 2)
             {
                 Console.WriteLine(" Player two win");
                 Console.WriteLine(" The game is over ");
-                PlayerOne.score = 0;
-                PlayerTwo.score = 0;
+                player1.score = 0;
+                player2.score = 0;
             }
 
         }
+
         public void startComputer()
         {
-            
+            // section for player vs. computer
         }
     }
 }

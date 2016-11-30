@@ -8,17 +8,43 @@ namespace RPSLS
 {
     class Human : Player
     {
-        public string name;
-        public int age;
-        public Human(string Name, int Age)
+        
+        public Human()
         {
-            name = Name;
-            age = Age;
+            
         }
-        public virtual void DisplayInfo()
+        public override void GetName()
         {
-            Console.WriteLine("Name: {0}", name);
-            Console.WriteLine("Age: {0}", age);
+            Console.WriteLine("Please enter your name");
+            name = Console.ReadLine();
+        }
+        public override void MakeChoice()
+        {
+            Console.WriteLine("Enter: Paper, Rock, Scissors, Lizard, or Spock.");
+            choice = Console.ReadLine().ToLower();
+
+            switch (choice)
+            {
+                case "paper":
+                    Console.WriteLine(" Player have chosen: " + choice + "! \n");
+                    break;
+                case "rock":
+                    Console.WriteLine(" Player have chosen:  " + choice + "! \n");
+                    break;
+                case "scissors":
+                    Console.WriteLine(" Player have chosen: " + choice + "! \n");
+                    break;
+                case "lizard":
+                    Console.WriteLine(" Player have chosen:  " + choice + "! \n");
+                    break;
+                case "spock":
+                    Console.WriteLine(" Player have chosen:  " + choice + "! \n");
+                    break;
+                default:
+                    Console.WriteLine(" Please chose a choice! ");
+                    MakeChoice();
+                    break;
+            }
         }
     }
 }

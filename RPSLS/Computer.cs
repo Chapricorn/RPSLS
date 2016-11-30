@@ -6,20 +6,15 @@ using System.Threading.Tasks;
 
 namespace RPSLS
 {
-    class Computer
+    class Computer : Player
     {
-        public string _name;
-      
-
-        public Computer(string name)
+        public override void GetName()
         {
-            _name = name;
-      
+            name = "Computer";
         }
-        public virtual void DisplayInfo()
+        public override void MakeChoice()
         {
-            Console.WriteLine("Name: {0}", _name);
-       
+            
         }
     }
 }

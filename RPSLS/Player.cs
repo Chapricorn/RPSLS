@@ -9,37 +9,32 @@ namespace RPSLS
     class Player
     {
         // public properties
-        public string _name;
-       
+        public string name;       
         public int score;
-        public string chooseChoice;
-
-        /// <summary>
-        /// Set  Property values
-        /// </summary>
-        /// <param name="name"></param>
+        public string choice;
      
-        public void SetPlayerProperties(string name )
+        public void SetPlayerProperties()
         {
-            _name = name;         
+            //name = Name;         
             score = 0;
         }
-
-        /// <summary>
-        /// display player's information
-        /// </summary>
         public virtual void DisplayInfo()
         {
-            Console.WriteLine("Name: {0}", _name);          
+            Console.WriteLine("Name: {0}", name);          
         }
 
-        /// <summary>
-        /// add 1 to players score
-        /// </summary>
         public void AddWinningScore()
         {
-            score  += 1;  //this is equevelent to score = score + 1
+            score = score + 1;  
 
+        }
+        public virtual void MakeChoice()
+        {
+
+        }
+        public virtual void GetName()
+        {
+            
         }
     }
 }
