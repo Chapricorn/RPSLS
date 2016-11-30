@@ -20,21 +20,17 @@ namespace RPSLS
             game.gameRules();
             game.playerOrComp(PlayerOne, PlayerTwo);
             //game.startComputer();
-
+         
             // choose choice for players
             // while no player is winning, continue playing
-            while (PlayerOne.score < 2 && PlayerTwo.score < 2)
+            //while (PlayerOne.score < 2 && PlayerTwo.score < 2)
             {
                 game.chooseChoiceForPlayerOne(PlayerOne);
                 game.chooseChoiceForPlayerTwo(PlayerTwo);
                 game.ComputeWinner(PlayerOne, PlayerTwo);
-
             }
 
             //game.startComputer();
-
-            //game.PlayerOne.DisplayInfo();
-            //game.PlayerTwo.DisplayInfo();
 
         }
     }

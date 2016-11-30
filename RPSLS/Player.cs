@@ -10,8 +10,7 @@ namespace RPSLS
     {
         // public properties
         public string _name;
-        public int _age;
-        public string _brand;
+       
         public int score;
         public string chooseChoice;
 
@@ -19,15 +18,11 @@ namespace RPSLS
         /// Set  Property values
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="Age"></param>
-        /// <param name="brand"></param>
-        public void SetPlayerProperties(string name, int Age, string brand )
+     
+        public void SetPlayerProperties(string name )
         {
-            _name = name;
-            _age = Age;
-            _brand = brand;
+            _name = name;         
             score = 0;
-
         }
 
         /// <summary>
@@ -35,10 +30,7 @@ namespace RPSLS
         /// </summary>
         public virtual void DisplayInfo()
         {
-            Console.WriteLine("Name: {0}", _name);
-            Console.WriteLine("Age: {0}", _age);
-            Console.WriteLine("Brand: {0}", _brand);
-          
+            Console.WriteLine("Name: {0}", _name);          
         }
 
         /// <summary>
