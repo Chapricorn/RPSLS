@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace RPSLS
 {
-    class CompVsPlayer
+    class AI
     {
+        //AI.StartComputer();
+        //Console.ReadLine();
     }
 }
